@@ -1,5 +1,7 @@
 package com.example.socialmediaapplicationbackend.configuration;
 
+import com.example.socialmediaapplicationbackend.configuration.filter.JwtTokenFilter;
+import com.example.socialmediaapplicationbackend.exception.CustomAuthenticationEntryPoint;
 import com.example.socialmediaapplicationbackend.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;

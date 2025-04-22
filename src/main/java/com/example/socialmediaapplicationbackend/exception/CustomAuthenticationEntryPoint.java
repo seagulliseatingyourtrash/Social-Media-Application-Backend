@@ -1,5 +1,6 @@
 package com.example.socialmediaapplicationbackend.exception;
 
+import com.example.socialmediaapplicationbackend.controller.response.Response;
 import org.springframework.security.core.AuthenticationException;
 
 import javax.servlet.ServletException;
