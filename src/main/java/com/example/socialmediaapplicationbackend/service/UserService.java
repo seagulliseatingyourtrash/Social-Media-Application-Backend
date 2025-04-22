@@ -28,6 +28,14 @@ public class UserService {
     @Value("${jwt.token.expired-time-ms}")
     private Long expiredTimeMs;
 
+
+    public User loadUserByUsername(String userName) throws UsernameNotFoundException {
+        return redisRepository.getUser(userName).orElseGet(
+                () -> userRepository.findByUserName(userName).map(User::fromEntity).orElseThrow(
+                        () -> new SimpleSnsApplicationException(ErrorCode.USER_NOT_FOUND, String.format("userName is %s", userName))
+                ));
+    }
+
     @Transactional
     public User join(String userName, String password) {
         // check the userId not exist
@@ -37,13 +45,6 @@ public class UserService {
 
         UserEntity savedUser = userRepository.save(UserEntity.of(userName, encoder.encode(password)));
         return User.fromEntity(savedUser);
-    }
-
-    public User loadUserByUsername(String userName) throws UsernameNotFoundException {
-        return redisRepository.getUser(userName).orElseGet(
-                () -> userRepository.findByUserName(userName).map(User::fromEntity).orElseThrow(
-                        () -> new SimpleSnsApplicationException(ErrorCode.USER_NOT_FOUND, String.format("userName is %s", userName))
-                ));
     }
 
     public String login(String userName, String password) {

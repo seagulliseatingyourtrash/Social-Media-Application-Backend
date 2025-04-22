@@ -1,6 +1,7 @@
 package com.example.socialmediaapplicationbackend.controller;
 
 import com.example.socialmediaapplicationbackend.controller.request.UserJoinRequest;
+import com.example.socialmediaapplicationbackend.controller.request.UserLoginRequest;
 import com.example.socialmediaapplicationbackend.exception.ErrorCode;
 import com.example.socialmediaapplicationbackend.exception.SimpleSnsApplicationException;
 import com.example.socialmediaapplicationbackend.model.User;
