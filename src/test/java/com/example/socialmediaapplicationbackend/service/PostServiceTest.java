@@ -5,6 +5,7 @@ import com.example.socialmediaapplicationbackend.exception.SimpleSnsApplicationE
 import com.example.socialmediaapplicationbackend.fixture.TestInfoFixture;
 import com.example.socialmediaapplicationbackend.fixture.UserEntityFixture;
 import com.example.socialmediaapplicationbackend.model.entity.PostEntity;
+import com.example.socialmediaapplicationbackend.model.entity.UserEntity;
 import com.example.socialmediaapplicationbackend.repository.PostEntityRepository;
 import com.example.socialmediaapplicationbackend.repository.UserEntityRepository;
 import org.junit.jupiter.api.Assertions;
@@ -61,5 +62,30 @@ public class PostServiceTest {
         Assertions.assertEquals(ErrorCode.POST_NOT_FOUND, exception.getErrorCode());
     }
 
+    @Test
+    void should_throw_when_user_not_found_on_modify() {
+        TestInfoFixture.TestInfo fixture = TestInfoFixture.get();
+        when(postEntityRepository.findById(fixture.getPostId())).thenReturn(Optional.of(mock(PostEntity.class)));
+        when(userEntityRepository.findByUserName(fixture.getUserName())).thenReturn(Optional.empty());
+
+        SimpleSnsApplicationException exception = Assertions.assertThrows(SimpleSnsApplicationException.class,
+                () -> postService.modify(fixture.getUserId(), fixture.getPostId(), fixture.getTitle(), fixture.getBody()));
+        Assertions.assertEquals(ErrorCode.USER_NOT_FOUND, exception.getErrorCode());
+    }
+
+    @Test
+    void should_throw_when_user_is_not_post_owner_on_modify() {
+        PostEntity mockPostEntity = mock(PostEntity.class);
+        UserEntity mockUserEntity = mock(UserEntity.class);
+        TestInfoFixture.TestInfo fixture = TestInfoFixture.get();
+
+        when(postEntityRepository.findById(fixture.getPostId())).thenReturn(Optional.of(mockPostEntity));
+        when(userEntityRepository.findByUserName(fixture.getUserName())).thenReturn(Optional.of(mockUserEntity));
+        when(mockPostEntity.getUser()).thenReturn(mock(UserEntity.class));
+
+        SimpleSnsApplicationException exception = Assertions.assertThrows(SimpleSnsApplicationException.class,
+                () -> postService.modify(fixture.getUserId(), fixture.getPostId(), fixture.getTitle(), fixture.getBody()));
+        Assertions.assertEquals(ErrorCode.INVALID_PERMISSION, exception.getErrorCode());
+    }
 
 }
