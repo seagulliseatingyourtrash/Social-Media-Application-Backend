@@ -1,6 +1,8 @@
 package com.example.socialmediaapplicationbackend.configuration.filter;
 
+import com.example.socialmediaapplicationbackend.model.User;
 import com.example.socialmediaapplicationbackend.service.UserService;
+import com.example.socialmediaapplicationbackend.utils.JwtTokenUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
