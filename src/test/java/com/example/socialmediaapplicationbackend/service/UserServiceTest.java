@@ -14,6 +14,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.util.Optional;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 @SpringBootTest
@@ -27,6 +28,30 @@ public class UserServiceTest {
 
     @MockBean
     BCryptPasswordEncoder bCryptPasswordEncoder;
+
+    @Test
+    void join_should_succeed() {
+        TestInfoFixture.TestInfo fixture = TestInfoFixture.get();
+
+        when(userEntityRepository.findByUserName(fixture.getUserName())).thenReturn(Optional.of(UserEntityFixture.get(fixture.getUserName(), fixture.getPassword())));
+        when(bCryptPasswordEncoder.encode(fixture.getPassword())).thenReturn("password_encrypt");
+        when(userEntityRepository.save(any())).thenReturn(Optional.of(UserEntityFixture.get(fixture.getUserName(), "password_encrypt")));
+
+        Assertions.assertDoesNotThrow(() -> userService.join(fixture.getUserName(), fixture.getPassword()));
+    }
+
+    @Test
+    void join_should_fail_when_username_is_duplicated() {
+        TestInfoFixture.TestInfo fixture = TestInfoFixture.get();
+
+        when(userEntityRepository.findByUserName(fixture.getUserName()))
+                .thenReturn(Optional.of(UserEntityFixture.get(fixture.getUserName(), fixture.getPassword())));
+
+        SimpleSnsApplicationException exception = Assertions.assertThrows(SimpleSnsApplicationException.class,
+                () -> userService.join(fixture.getUserName(), fixture.getPassword()));
+
+        Assertions.assertEquals(ErrorCode.DUPLICATED_USER_NAME, exception.getErrorCode());
+    }
 
     @Test
     void login_should_succeed() {
