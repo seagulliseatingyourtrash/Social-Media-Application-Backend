@@ -1,6 +1,6 @@
 package com.example.socialmediaapplicationbackend.repository;
 
-import com.example.socialmediaapplicationbackend.controller.model.entity.UserEntity;
+import com.example.socialmediaapplicationbackend.model.entity.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

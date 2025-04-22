@@ -1,6 +1,6 @@
-package com.example.socialmediaapplicationbackend.controller.model;
+package com.example.socialmediaapplicationbackend.model;
 
-import com.example.socialmediaapplicationbackend.controller.model.entity.UserEntity;
+import com.example.socialmediaapplicationbackend.model.entity.UserEntity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;

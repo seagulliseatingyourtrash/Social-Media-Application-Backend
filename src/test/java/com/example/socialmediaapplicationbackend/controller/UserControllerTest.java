@@ -1,6 +1,6 @@
 package com.example.socialmediaapplicationbackend.controller;
 
-import com.example.socialmediaapplicationbackend.controller.model.User;
+import com.example.socialmediaapplicationbackend.model.User;
 import com.example.socialmediaapplicationbackend.service.UserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;

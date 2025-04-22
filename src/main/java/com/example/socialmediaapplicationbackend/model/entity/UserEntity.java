@@ -1,6 +1,6 @@
-package com.example.socialmediaapplicationbackend.controller.model.entity;
+package com.example.socialmediaapplicationbackend.model.entity;
 
-import com.example.socialmediaapplicationbackend.controller.model.UserRole;
+import com.example.socialmediaapplicationbackend.model.UserRole;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
