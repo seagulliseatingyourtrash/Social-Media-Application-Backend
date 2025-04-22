@@ -7,6 +7,7 @@ import com.example.socialmediaapplicationbackend.model.entity.UserEntity;
 import com.example.socialmediaapplicationbackend.repository.AlarmEntityRepository;
 import com.example.socialmediaapplicationbackend.repository.UserCacheRepository;
 import com.example.socialmediaapplicationbackend.repository.UserEntityRepository;
+import com.example.socialmediaapplicationbackend.utils.JwtTokenUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
