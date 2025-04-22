@@ -51,5 +51,15 @@ public class PostServiceTest {
         Assertions.assertEquals(ErrorCode.USER_NOT_FOUND, exception.getErrorCode());
     }
 
+    @Test
+    void should_throw_when_post_not_found_on_modify() {
+        TestInfoFixture.TestInfo fixture = TestInfoFixture.get();
+        when(postEntityRepository.findById(fixture.getPostId())).thenReturn(Optional.empty());
+
+        SimpleSnsApplicationException exception = Assertions.assertThrows(SimpleSnsApplicationException.class,
+                () -> postService.modify(fixture.getUserId(), fixture.getPostId(), fixture.getTitle(), fixture.getBody()));
+        Assertions.assertEquals(ErrorCode.POST_NOT_FOUND, exception.getErrorCode());
+    }
+
 
 }
