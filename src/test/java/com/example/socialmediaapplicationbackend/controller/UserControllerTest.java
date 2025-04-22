@@ -61,4 +61,50 @@ public class UserControllerTest {
                 .andDo(print())
                 .andExpect(status().is(ErrorCode.DUPLICATED_USER_NAME.getStatus().value()));
     }
+
+    @Test
+    @WithAnonymousUser
+    public void login_success() throws Exception {
+        String userName = "name";
+        String password = "password";
+
+        when(userService.login(userName, password)).thenReturn("testToken");
+
+        mockMvc.perform(post("/api/v1/users/login")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsBytes(new UserLoginRequest("name", "password"))))
+                .andDo(print())
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    @WithAnonymousUser
+    public void login_with_nonexistent_user_should_fail() throws Exception {
+        String userName = "name";
+        String password = "password";
+
+        when(userService.login(userName, password)).thenThrow(new SimpleSnsApplicationException(ErrorCode.USER_NOT_FOUND));
+
+        mockMvc.perform(post("/api/v1/users/login")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsBytes(new UserLoginRequest("name", "password"))))
+                .andDo(print())
+                .andExpect(status().is(ErrorCode.USER_NOT_FOUND.getStatus().value()));
+    }
+
+    @Test
+    @WithAnonymousUser
+    public void login_with_invalid_password_should_fail() throws Exception {
+        String userName = "name";
+        String password = "password";
+
+        when(userService.login(userName, password)).thenThrow(new SimpleSnsApplicationException(ErrorCode.INVALID_PASSWORD));
+
+        mockMvc.perform(post("/api/v1/users/login")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsBytes(new UserLoginRequest("name", "password"))))
+                .andDo(print())
+                .andExpect(status().is(ErrorCode.INVALID_PASSWORD.getStatus().value()));
+    }
+
 }
