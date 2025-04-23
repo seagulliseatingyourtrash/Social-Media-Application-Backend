@@ -88,4 +88,40 @@ public class PostServiceTest {
         Assertions.assertEquals(ErrorCode.INVALID_PERMISSION, exception.getErrorCode());
     }
 
+    @Test
+    void should_throw_when_post_not_found_on_delete() {
+        TestInfoFixture.TestInfo fixture = TestInfoFixture.get();
+        when(postEntityRepository.findById(fixture.getPostId())).thenReturn(Optional.empty());
+
+        SimpleSnsApplicationException exception = Assertions.assertThrows(SimpleSnsApplicationException.class,
+                () -> postService.delete(fixture.getUserId(), fixture.getPostId()));
+        Assertions.assertEquals(ErrorCode.POST_NOT_FOUND, exception.getErrorCode());
+    }
+
+    @Test
+    void should_throw_when_user_not_found_on_delete() {
+        TestInfoFixture.TestInfo fixture = TestInfoFixture.get();
+        when(postEntityRepository.findById(fixture.getPostId())).thenReturn(Optional.of(mock(PostEntity.class)));
+        when(userEntityRepository.findByUserName(fixture.getUserName())).thenReturn(Optional.empty());
+
+        SimpleSnsApplicationException exception = Assertions.assertThrows(SimpleSnsApplicationException.class,
+                () -> postService.delete(fixture.getUserId(), fixture.getPostId()));
+        Assertions.assertEquals(ErrorCode.USER_NOT_FOUND, exception.getErrorCode());
+    }
+
+    @Test
+    void should_throw_when_user_is_not_post_owner_on_delete() {
+        PostEntity mockPostEntity = mock(PostEntity.class);
+        UserEntity mockUserEntity = mock(UserEntity.class);
+        TestInfoFixture.TestInfo fixture = TestInfoFixture.get();
+
+        when(postEntityRepository.findById(fixture.getPostId())).thenReturn(Optional.of(mockPostEntity));
+        when(userEntityRepository.findByUserName(fixture.getUserName())).thenReturn(Optional.of(mockUserEntity));
+        when(mockPostEntity.getUser()).thenReturn(mock(UserEntity.class));
+
+        SimpleSnsApplicationException exception = Assertions.assertThrows(SimpleSnsApplicationException.class,
+                () -> postService.delete(fixture.getUserId(), fixture.getPostId()));
+        Assertions.assertEquals(ErrorCode.INVALID_PERMISSION, exception.getErrorCode());
+    }
+
 }
