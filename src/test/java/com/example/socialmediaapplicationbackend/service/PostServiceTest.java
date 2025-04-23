@@ -13,6 +13,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import java.util.Optional;
 
@@ -123,5 +125,24 @@ public class PostServiceTest {
                 () -> postService.delete(fixture.getUserId(), fixture.getPostId()));
         Assertions.assertEquals(ErrorCode.INVALID_PERMISSION, exception.getErrorCode());
     }
+
+    @Test
+    void should_return_post_list_successfully() {
+        Pageable pageable = mock(Pageable.class);
+        when(postEntityRepository.findAll(pageable)).thenReturn(Page.empty());
+
+        Assertions.assertDoesNotThrow(() -> postService.list(pageable));
+    }
+
+    @Test
+    void should_return_my_post_list_successfully() {
+        TestInfoFixture.TestInfo fixture = TestInfoFixture.get();
+        Pageable pageable = mock(Pageable.class);
+
+        when(postEntityRepository.findAllByUserId(any(), pageable)).thenReturn(Page.empty());
+
+        Assertions.assertDoesNotThrow(() -> postService.my(fixture.getUserId(), pageable));
+    }
+
 
 }
