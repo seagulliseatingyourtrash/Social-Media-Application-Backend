@@ -143,7 +143,7 @@ public class PostServiceTest {
 
         Assertions.assertDoesNotThrow(() -> postService.my(fixture.getUserId(), pageable));
     }
-    
+
     @Test
     void should_throw_when_user_not_found_on_get_my_posts() {
         TestInfoFixture.TestInfo fixture = TestInfoFixture.get();
@@ -153,6 +153,5 @@ public class PostServiceTest {
                 () -> postService.my(fixture.getUserId(), mock(Pageable.class)));
         Assertions.assertEquals(ErrorCode.USER_NOT_FOUND, exception.getErrorCode());
     }
-
 
 }
