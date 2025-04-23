@@ -1,9 +1,12 @@
 package com.example.socialmediaapplicationbackend.controller;
 
+import com.example.socialmediaapplicationbackend.controller.request.PostModifyRequest;
 import com.example.socialmediaapplicationbackend.controller.request.PostWriteRequest;
 import com.example.socialmediaapplicationbackend.controller.response.PostResponse;
 import com.example.socialmediaapplicationbackend.controller.response.Response;
+import com.example.socialmediaapplicationbackend.model.User;
 import com.example.socialmediaapplicationbackend.service.PostService;
+import com.example.socialmediaapplicationbackend.utils.ClassUtils;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -33,6 +36,15 @@ public class PostController {
         User user = ClassUtils.getSafeCastInstance(authentication.getPrincipal(), User.class);
         return Response.success(postService.my(user.getId(), pageable).map(PostResponse::fromPost));
     }
+
+    @PutMapping("/{postId}")
+    public Response<PostResponse> modify(@PathVariable Integer postId, @RequestBody PostModifyRequest request, Authentication authentication) {
+        User user = ClassUtils.getSafeCastInstance(authentication.getPrincipal(), User.class);
+        return Response.success(
+                PostResponse.fromPost(
+                        postService.modify(user.getId(), postId, request.getTitle(), request.getBody())));
+    }
+
 
 
 }
