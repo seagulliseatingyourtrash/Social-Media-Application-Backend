@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithAnonymousUser;
 import org.springframework.security.test.context.support.WithMockUser;
@@ -21,6 +22,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doThrow;
 import static org.springframework.mock.http.server.reactive.MockServerHttpRequest.put;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -97,6 +99,53 @@ public class PostControllerTest {
         mockMvc.perform(MockMvcRequestBuilders.put("/api/v1/posts/1")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsBytes(new PostModifyRequest("title", "body"))))
+                .andDo(print())
+                .andExpect(status().is(ErrorCode.DATABASE_ERROR.getStatus().value()));
+    }
+
+    @Test
+    @WithAnonymousUser
+    void should_fail_to_delete_post_when_not_authenticated() throws Exception {
+        mockMvc.perform(delete("/api/v1/posts/1")
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().is(ErrorCode.INVALID_TOKEN.getStatus().value()));
+    }
+
+    @Test
+    @WithMockUser
+    void should_fail_to_delete_post_when_user_is_not_owner() throws Exception {
+        doThrow(new SimpleSnsApplicationException(ErrorCode.INVALID_PERMISSION)).when(postService)
+                .delete(any(), eq(1));
+
+        mockMvc.perform(delete("/api/v1/posts/1")
+                        .header(HttpHeaders.AUTHORIZATION, "Bearer token")
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().is(ErrorCode.INVALID_PERMISSION.getStatus().value()));
+    }
+
+    @Test
+    @WithMockUser
+    void should_fail_to_delete_post_when_post_not_found() throws Exception {
+        doThrow(new SimpleSnsApplicationException(ErrorCode.POST_NOT_FOUND)).when(postService)
+                .delete(any(), eq(1));
+
+        mockMvc.perform(delete("/api/v1/posts/1")
+                        .header(HttpHeaders.AUTHORIZATION, "Bearer token")
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().is(ErrorCode.POST_NOT_FOUND.getStatus().value()));
+    }
+
+    @Test
+    @WithMockUser
+    void should_fail_to_delete_post_when_database_error_occurs() throws Exception {
+        doThrow(new SimpleSnsApplicationException(ErrorCode.DATABASE_ERROR)).when(postService)
+                .delete(any(), eq(1));
+
+        mockMvc.perform(delete("/api/v1/posts/1")
+                        .contentType(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().is(ErrorCode.DATABASE_ERROR.getStatus().value()));
     }
