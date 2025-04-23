@@ -1,7 +1,9 @@
 package com.example.socialmediaapplicationbackend.controller;
 
+import com.example.socialmediaapplicationbackend.controller.request.PostModifyRequest;
 import com.example.socialmediaapplicationbackend.controller.request.PostWriteRequest;
 import com.example.socialmediaapplicationbackend.exception.ErrorCode;
+import com.example.socialmediaapplicationbackend.exception.SimpleSnsApplicationException;
 import com.example.socialmediaapplicationbackend.service.PostService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
@@ -13,7 +15,11 @@ import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithAnonymousUser;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.doThrow;
 import static org.springframework.mock.http.server.reactive.MockServerHttpRequest.put;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -55,7 +61,7 @@ public class PostControllerTest {
     @Test
     @WithAnonymousUser
     void should_fail_to_modify_post_when_not_authenticated() throws Exception {
-        mockMvc.perform(put("/api/v1/posts/1")
+        mockMvc.perform(MockMvcRequestBuilders.put("/api/v1/posts/1")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsBytes(new PostModifyRequest("title", "body"))))
                 .andDo(print())
@@ -65,10 +71,8 @@ public class PostControllerTest {
     @Test
     @WithMockUser
     void should_fail_to_modify_post_when_user_is_not_owner() throws Exception {
-        doThrow(new SimpleSnsApplicationException(ErrorCode.INVALID_PERMISSION)).when(postService)
-                .modify(any(), eq(1), eq("title"), eq("body"));
-
-        mockMvc.perform(put("/api/v1/posts/1")
+        doThrow(new SimpleSnsApplicationException(ErrorCode.INVALID_PERMISSION)).when(postService).modify(any(), eq(1), eq("title"), eq("body"));
+        mockMvc.perform(MockMvcRequestBuilders.put("/api/v1/posts/1")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsBytes(new PostModifyRequest("title", "body"))))
                 .andDo(print())
@@ -78,10 +82,8 @@ public class PostControllerTest {
     @Test
     @WithMockUser
     void should_fail_to_modify_post_when_post_not_found() throws Exception {
-        doThrow(new SimpleSnsApplicationException(ErrorCode.POST_NOT_FOUND)).when(postService)
-                .modify(any(), eq(1), eq("title"), eq("body"));
-
-        mockMvc.perform(put("/api/v1/posts/1")
+        doThrow(new SimpleSnsApplicationException(ErrorCode.POST_NOT_FOUND)).when(postService).modify(any(), eq(1), eq("title"), eq("body"));
+        mockMvc.perform(MockMvcRequestBuilders.put("/api/v1/posts/1")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsBytes(new PostModifyRequest("title", "body"))))
                 .andDo(print())
@@ -91,10 +93,8 @@ public class PostControllerTest {
     @Test
     @WithMockUser
     void should_fail_to_modify_post_when_database_error_occurs() throws Exception {
-        doThrow(new SimpleSnsApplicationException(ErrorCode.DATABASE_ERROR)).when(postService)
-                .modify(any(), eq(1), eq("title"), eq("body"));
-
-        mockMvc.perform(put("/api/v1/posts/1")
+        doThrow(new SimpleSnsApplicationException(ErrorCode.DATABASE_ERROR)).when(postService).modify(any(), eq(1), eq("title"), eq("body"));
+        mockMvc.perform(MockMvcRequestBuilders.put("/api/v1/posts/1")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsBytes(new PostModifyRequest("title", "body"))))
                 .andDo(print())
