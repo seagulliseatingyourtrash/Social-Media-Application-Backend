@@ -143,6 +143,16 @@ public class PostServiceTest {
 
         Assertions.assertDoesNotThrow(() -> postService.my(fixture.getUserId(), pageable));
     }
+    
+    @Test
+    void should_throw_when_user_not_found_on_get_my_posts() {
+        TestInfoFixture.TestInfo fixture = TestInfoFixture.get();
+        when(userEntityRepository.findByUserName(fixture.getUserName())).thenReturn(Optional.empty());
+
+        SimpleSnsApplicationException exception = Assertions.assertThrows(SimpleSnsApplicationException.class,
+                () -> postService.my(fixture.getUserId(), mock(Pageable.class)));
+        Assertions.assertEquals(ErrorCode.USER_NOT_FOUND, exception.getErrorCode());
+    }
 
 
 }
