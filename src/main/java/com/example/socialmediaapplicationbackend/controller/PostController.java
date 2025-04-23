@@ -1,6 +1,7 @@
 package com.example.socialmediaapplicationbackend.controller;
 
 import com.example.socialmediaapplicationbackend.controller.request.PostWriteRequest;
+import com.example.socialmediaapplicationbackend.controller.response.PostResponse;
 import com.example.socialmediaapplicationbackend.controller.response.Response;
 import com.example.socialmediaapplicationbackend.service.PostService;
 import lombok.AllArgsConstructor;
@@ -25,6 +26,12 @@ public class PostController {
     @GetMapping
     public Response<Page<PostResponse>> list(Pageable pageable, Authentication authentication) {
         return Response.success(postService.list(pageable).map(PostResponse::fromPost));
+    }
+
+    @GetMapping("/my")
+    public Response<Page<PostResponse>> myPosts(Pageable pageable, Authentication authentication) {
+        User user = ClassUtils.getSafeCastInstance(authentication.getPrincipal(), User.class);
+        return Response.success(postService.my(user.getId(), pageable).map(PostResponse::fromPost));
     }
 
 
