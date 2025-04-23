@@ -33,7 +33,7 @@ public class PostControllerTest {
 
     @Test
     @WithMockUser
-    void 포스트작성() throws Exception {
+    void should_create_post_when_authenticated() throws Exception {
         mockMvc.perform(post("/api/v1/posts")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsBytes(new PostWriteRequest("title", "body"))))
@@ -43,12 +43,13 @@ public class PostControllerTest {
 
     @Test
     @WithAnonymousUser
-    void 포스트작성시_로그인한상태가_아니라면_에러발생() throws Exception {
+    void should_fail_to_create_post_when_not_authenticated() throws Exception {
         mockMvc.perform(post("/api/v1/posts")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsBytes(new PostWriteRequest("title", "body"))))
                 .andDo(print())
                 .andExpect(status().is(ErrorCode.INVALID_TOKEN.getStatus().value()));
     }
+
 
 }
