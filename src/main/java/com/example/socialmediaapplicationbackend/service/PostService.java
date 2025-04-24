@@ -24,6 +24,7 @@ public class PostService {
     private final UserEntityRepository userEntityRepository;
     private final PostEntityRepository postEntityRepository;
     private final LikeEntityRepository likeEntityRepository;
+    private final AlarmProducer alarmProducer;
 
     @Transactional
     public void create(String userName, String title, String body) {
