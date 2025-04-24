@@ -6,6 +6,7 @@ import com.example.socialmediaapplicationbackend.model.Post;
 import com.example.socialmediaapplicationbackend.model.entity.LikeEntity;
 import com.example.socialmediaapplicationbackend.model.entity.PostEntity;
 import com.example.socialmediaapplicationbackend.model.entity.UserEntity;
+import com.example.socialmediaapplicationbackend.producer.AlarmProducer;
 import com.example.socialmediaapplicationbackend.repository.LikeEntityRepository;
 import com.example.socialmediaapplicationbackend.repository.PostEntityRepository;
 import com.example.socialmediaapplicationbackend.repository.UserEntityRepository;
