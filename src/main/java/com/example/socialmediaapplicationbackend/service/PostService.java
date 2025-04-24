@@ -3,6 +3,7 @@ package com.example.socialmediaapplicationbackend.service;
 import com.example.socialmediaapplicationbackend.exception.ErrorCode;
 import com.example.socialmediaapplicationbackend.exception.SimpleSnsApplicationException;
 import com.example.socialmediaapplicationbackend.model.Post;
+import com.example.socialmediaapplicationbackend.model.entity.LikeEntity;
 import com.example.socialmediaapplicationbackend.model.entity.PostEntity;
 import com.example.socialmediaapplicationbackend.model.entity.UserEntity;
 import com.example.socialmediaapplicationbackend.repository.LikeEntityRepository;
@@ -14,6 +15,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Objects;
 
 @Service
@@ -80,5 +82,10 @@ public class PostService {
         alarmProducer.send(new AlarmEvent(AlarmType.NEW_LIKE_ON_POST, new AlarmArgs(userEntity.getId(), postId), postEntity.getUser().getId()));
     }
 
+    public Integer getLikeCount(Integer postId) {
+        PostEntity postEntity = postEntityRepository.findById(postId).orElseThrow(() -> new SimpleSnsApplicationException(ErrorCode.POST_NOT_FOUND, String.format("postId is %d", postId)));
+        List<LikeEntity> likes = likeEntityRepository.findAllByPost(postEntity);
+        return likes.size();
+    }
 
 }
