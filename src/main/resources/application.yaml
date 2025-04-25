@@ -1,3 +1,12 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://ec2-52-86-115-245.compute-1.amazonaws.com/d2p70ft1bv6u4c
+    username: sohthnduwbipay
+    password: 62971a3ff89fb0c590e0253d6871ba2256d678d39233dfd9f41a91eff1ea0246
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      maximum-pool-size: 4
+
 jwt:
   secret-key: fast-campus.simple_sns_2022_secret_key
   # 30 days
