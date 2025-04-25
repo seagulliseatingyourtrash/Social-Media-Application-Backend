@@ -7,6 +7,13 @@ spring:
     hikari:
       maximum-pool-size: 4
 
+spring.jpa:
+  database: postgresql
+  hibernate.dialect: org.hibernate.dialect.PostgreSQLDialect
+  hibernate.ddl-auto: update
+  properties.hibernate.format_sql: true
+  show-sql: true
+
 jwt:
   secret-key: fast-campus.simple_sns_2022_secret_key
   # 30 days
