@@ -21,3 +21,25 @@ jwt:
 
 spring.redis:
   url: redis://:p8e682aad12b7caf6e8a4d75769964a337be7324cd4634764d238a7c4f53b357e@ec2-44-208-247-66.compute-1.amazonaws.com:22049
+
+
+spring.kafka:
+    bootstrap-servers: b-1.msk-cluster.abcd1234.c2.kafka.ap-northeast-2.amazonaws.com:9092,
+      b-2.msk-cluster.abcd1234.c2.kafka.ap-northeast-2.amazonaws.com:9092,
+      b-3.msk-cluster.abcd1234.c2.kafka.ap-northeast-2.amazonaws.com:9092
+    consumer:
+      group-id: notification
+      auto-offset-reset: latest
+      key-deserializer: org.apache.kafka.common.serialization.IntegerDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring.json.trusted.packages: "*"
+    listener:
+      ack-mode: MANUAL
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.IntegerSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+      properties:
+        enable.idempotence: false
+    topic:
+      notification: your-notification-topic-name
