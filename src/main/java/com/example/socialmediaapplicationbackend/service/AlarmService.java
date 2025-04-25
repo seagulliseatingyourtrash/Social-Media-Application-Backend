@@ -2,6 +2,7 @@ package com.example.socialmediaapplicationbackend.service;
 
 import com.example.socialmediaapplicationbackend.model.AlarmArgs;
 import com.example.socialmediaapplicationbackend.model.AlarmType;
+import com.example.socialmediaapplicationbackend.model.entity.AlarmEntity;
 import com.example.socialmediaapplicationbackend.model.entity.UserEntity;
 import com.example.socialmediaapplicationbackend.repository.AlarmEntityRepository;
 import com.example.socialmediaapplicationbackend.repository.EmitterRepository;
