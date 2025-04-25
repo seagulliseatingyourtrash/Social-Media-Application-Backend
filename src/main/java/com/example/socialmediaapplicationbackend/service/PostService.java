@@ -2,6 +2,9 @@ package com.example.socialmediaapplicationbackend.service;
 
 import com.example.socialmediaapplicationbackend.exception.ErrorCode;
 import com.example.socialmediaapplicationbackend.exception.SimpleSnsApplicationException;
+import com.example.socialmediaapplicationbackend.model.AlarmArgs;
+import com.example.socialmediaapplicationbackend.model.AlarmEvent;
+import com.example.socialmediaapplicationbackend.model.AlarmType;
 import com.example.socialmediaapplicationbackend.model.Post;
 import com.example.socialmediaapplicationbackend.model.entity.LikeEntity;
 import com.example.socialmediaapplicationbackend.model.entity.PostEntity;
@@ -80,7 +83,7 @@ public class PostService {
         likeEntityRepository.save(LikeEntity.of(postEntity, userEntity));
 
         // create alarm
-        //otificationService.send(AlarmType.NEW_LIKE_ON_POST, new AlarmArgs(userEntity.getId(), postId), postEntity.getUser());
+        // NotificationService.send(AlarmType.NEW_LIKE_ON_POST, new AlarmArgs(userEntity.getId(), postId), postEntity.getUser());
         alarmProducer.send(new AlarmEvent(AlarmType.NEW_LIKE_ON_POST, new AlarmArgs(userEntity.getId(), postId), postEntity.getUser().getId()));
     }
 

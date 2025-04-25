@@ -42,4 +42,4 @@ spring.kafka:
       properties:
         enable.idempotence: false
     topic:
-      notification: your-notification-topic-name
+      notification: alarm-notification
