@@ -1,7 +1,9 @@
 package com.example.socialmediaapplicationbackend.controller;
 
+import com.example.socialmediaapplicationbackend.controller.request.PostCommentRequest;
 import com.example.socialmediaapplicationbackend.controller.request.PostModifyRequest;
 import com.example.socialmediaapplicationbackend.controller.request.PostWriteRequest;
+import com.example.socialmediaapplicationbackend.controller.response.CommentResponse;
 import com.example.socialmediaapplicationbackend.controller.response.PostResponse;
 import com.example.socialmediaapplicationbackend.controller.response.Response;
 import com.example.socialmediaapplicationbackend.model.User;

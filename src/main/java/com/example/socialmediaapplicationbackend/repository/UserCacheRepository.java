@@ -13,6 +13,7 @@ import java.util.Optional;
 @Repository
 @RequiredArgsConstructor
 public class UserCacheRepository {
+
     private final RedisTemplate<String, User> userRedisTemplate;
 
     private final static Duration USER_CACHE_TTL = Duration.ofDays(3);

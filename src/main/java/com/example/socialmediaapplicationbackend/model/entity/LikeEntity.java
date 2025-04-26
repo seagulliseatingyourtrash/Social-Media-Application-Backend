@@ -18,6 +18,7 @@ import java.time.Instant;
 @Where(clause = "removed_at is NULL")
 @NoArgsConstructor
 public class LikeEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id = null;

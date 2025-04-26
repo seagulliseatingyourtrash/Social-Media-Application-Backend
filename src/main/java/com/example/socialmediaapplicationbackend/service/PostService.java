@@ -24,6 +24,7 @@ import java.util.Objects;
 @Service
 @RequiredArgsConstructor
 public class PostService {
+
     private final UserEntityRepository userEntityRepository;
     private final PostEntityRepository postEntityRepository;
     private final CommentEntityRepository commentEntityRepository;
