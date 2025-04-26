@@ -1,5 +1,6 @@
 package com.example.socialmediaapplicationbackend.controller.response;
 
+import com.example.socialmediaapplicationbackend.model.Alarm;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 

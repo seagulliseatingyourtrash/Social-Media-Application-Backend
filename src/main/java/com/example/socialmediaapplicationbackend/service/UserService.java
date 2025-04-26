@@ -2,6 +2,7 @@ package com.example.socialmediaapplicationbackend.service;
 
 import com.example.socialmediaapplicationbackend.exception.ErrorCode;
 import com.example.socialmediaapplicationbackend.exception.SimpleSnsApplicationException;
+import com.example.socialmediaapplicationbackend.model.Alarm;
 import com.example.socialmediaapplicationbackend.model.User;
 import com.example.socialmediaapplicationbackend.model.entity.UserEntity;
 import com.example.socialmediaapplicationbackend.repository.AlarmEntityRepository;
@@ -10,6 +11,8 @@ import com.example.socialmediaapplicationbackend.repository.UserEntityRepository
 import com.example.socialmediaapplicationbackend.utils.JwtTokenUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -57,5 +60,9 @@ public class UserService {
         return JwtTokenUtils.generateAccessToken(userName, secretKey, expiredTimeMs);
     }
 
+    @Transactional
+    public Page<Alarm> alarmList(Integer userId, Pageable pageable) {
+        return alarmEntityRepository.findAllByUserId(userId, pageable).map(Alarm::fromEntity);
+    }
 
 }
