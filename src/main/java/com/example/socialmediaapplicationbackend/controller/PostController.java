@@ -52,5 +52,28 @@ public class PostController {
         return Response.success();
     }
 
+    @GetMapping("/{postId}/comments")
+    public Response<Page<CommentResponse>> getComments(Pageable pageable, @PathVariable Integer postId) {
+        return Response.success(postService.getComments(postId, pageable).map(CommentResponse::fromComment));
+    }
+
+    @GetMapping("/{postId}/likes")
+    public Response<Integer> getLikes(@PathVariable Integer postId, Authentication authentication) {
+        return Response.success(postService.getLikeCount(postId));
+    }
+
+
+    @PostMapping("/{postId}/comments")
+    public Response<Void> comment(@PathVariable Integer postId, @RequestBody PostCommentRequest request, Authentication authentication) {
+        postService.comment(postId, authentication.getName(), request.getComment());
+        return Response.success();
+    }
+
+    @PostMapping("/{postId}/likes")
+    public Response<Void> like(@PathVariable Integer postId, Authentication authentication) {
+        postService.like(postId, authentication.getName());
+        return Response.success();
+    }
+
 
 }

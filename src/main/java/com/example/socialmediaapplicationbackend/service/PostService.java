@@ -2,10 +2,7 @@ package com.example.socialmediaapplicationbackend.service;
 
 import com.example.socialmediaapplicationbackend.exception.ErrorCode;
 import com.example.socialmediaapplicationbackend.exception.SimpleSnsApplicationException;
-import com.example.socialmediaapplicationbackend.model.AlarmArgs;
-import com.example.socialmediaapplicationbackend.model.AlarmEvent;
-import com.example.socialmediaapplicationbackend.model.AlarmType;
-import com.example.socialmediaapplicationbackend.model.Post;
+import com.example.socialmediaapplicationbackend.model.*;
 import com.example.socialmediaapplicationbackend.model.entity.CommentEntity;
 import com.example.socialmediaapplicationbackend.model.entity.LikeEntity;
 import com.example.socialmediaapplicationbackend.model.entity.PostEntity;
