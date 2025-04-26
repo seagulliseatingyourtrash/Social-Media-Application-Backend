@@ -112,7 +112,7 @@ public class UserControllerTest {
                 .andExpect(status().is(ErrorCode.INVALID_PASSWORD.getStatus().value()));
     }
 
-    // alarm test
+    // alarm feature test
 
     @Test
     @WithMockUser

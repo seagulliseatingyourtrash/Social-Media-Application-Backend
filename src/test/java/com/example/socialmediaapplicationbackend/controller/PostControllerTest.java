@@ -195,6 +195,10 @@ public class PostControllerTest {
                 .andExpect(status().isUnauthorized());
     }
 
+    /**
+     * Like feature
+     */
+
     @Test
     @WithMockUser
     void should_like_post_when_authenticated() throws Exception {
@@ -224,6 +228,44 @@ public class PostControllerTest {
                 .andDo(print())
                 .andExpect(status().isNotFound());
     }
+
+
+    /**
+     * Comment feature
+     */
+
+    @Test
+    @WithMockUser
+    void should_add_comment_when_authenticated() throws Exception {
+        mockMvc.perform(post("/api/v1/posts/1/comments")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsBytes(new PostCommentRequest("comment"))))
+                .andDo(print())
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    @WithAnonymousUser
+    void should_fail_to_add_comment_when_not_authenticated() throws Exception {
+        mockMvc.perform(post("/api/v1/posts/1/comments")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsBytes(new PostCommentRequest("comment"))))
+                .andDo(print())
+                .andExpect(status().isUnauthorized());
+    }
+
+    @Test
+    @WithMockUser
+    void should_fail_to_add_comment_when_post_not_found() throws Exception {
+        doThrow(new SimpleSnsApplicationException(ErrorCode.POST_NOT_FOUND)).when(postService).comment(any(), any(), any());
+
+        mockMvc.perform(post("/api/v1/posts/1/comments")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsBytes(new PostCommentRequest("comment"))))
+                .andDo(print())
+                .andExpect(status().isNotFound());
+    }
+
 
 
 
