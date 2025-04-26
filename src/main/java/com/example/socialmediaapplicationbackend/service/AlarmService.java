@@ -1,6 +1,9 @@
 package com.example.socialmediaapplicationbackend.service;
 
+import com.example.socialmediaapplicationbackend.exception.ErrorCode;
+import com.example.socialmediaapplicationbackend.exception.SimpleSnsApplicationException;
 import com.example.socialmediaapplicationbackend.model.AlarmArgs;
+import com.example.socialmediaapplicationbackend.model.AlarmNoti;
 import com.example.socialmediaapplicationbackend.model.AlarmType;
 import com.example.socialmediaapplicationbackend.model.entity.AlarmEntity;
 import com.example.socialmediaapplicationbackend.model.entity.UserEntity;
@@ -44,5 +47,24 @@ public class AlarmService {
                 () -> log.info("No emitter founded")
         );
     }
+
+    public SseEmitter connectNotification(Integer userId) {
+        SseEmitter emitter = new SseEmitter(DEFAULT_TIMEOUT);
+        emitterRepository.save(userId, emitter);
+        emitter.onCompletion(() -> emitterRepository.delete(userId));
+        emitter.onTimeout(() -> emitterRepository.delete(userId));
+
+        try {
+            log.info("send");
+            emitter.send(SseEmitter.event()
+                    .id("id")
+                    .name(ALARM_NAME)
+                    .data("connect completed"));
+        } catch (IOException exception) {
+            throw new SimpleSnsApplicationException(ErrorCode.NOTIFICATION_CONNECT_ERROR);
+        }
+        return emitter;
+    }
+
 
 }
