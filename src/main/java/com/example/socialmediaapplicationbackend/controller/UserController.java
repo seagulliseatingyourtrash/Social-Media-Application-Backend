@@ -8,6 +8,8 @@ import com.example.socialmediaapplicationbackend.controller.response.UserLoginRe
 import com.example.socialmediaapplicationbackend.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
@@ -33,6 +35,12 @@ public class UserController {
     @GetMapping("/me")
     public Response<UserJoinResponse> me(Authentication authentication) {
         return Response.success(UserJoinResponse.fromUser(userService.loadUserByUsername(authentication.getName())));
+    }
+
+    @GetMapping("/alarm")
+    public Response<Page<AlarmResponse>> alarm(Pageable pageable, Authentication authentication) {
+        User user = ClassUtils.getSafeCastInstance(authentication.getPrincipal(), User.class);
+        return Response.success(userService.alarmList(user.getId(), pageable).map(AlarmResponse::fromAlarm));
     }
 
 }
