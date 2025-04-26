@@ -27,6 +27,7 @@ import java.util.Objects;
 public class PostService {
     private final UserEntityRepository userEntityRepository;
     private final PostEntityRepository postEntityRepository;
+    private final CommentEntityRepository commentEntityRepository;
     private final LikeEntityRepository likeEntityRepository;
     private final AlarmProducer alarmProducer;
 
@@ -91,6 +92,24 @@ public class PostService {
         PostEntity postEntity = postEntityRepository.findById(postId).orElseThrow(() -> new SimpleSnsApplicationException(ErrorCode.POST_NOT_FOUND, String.format("postId is %d", postId)));
         List<LikeEntity> likes = likeEntityRepository.findAllByPost(postEntity);
         return likes.size();
+    }
+
+    @Transactional
+    public void comment(Integer postId, String userName, String comment) {
+        PostEntity postEntity = postEntityRepository.findById(postId).orElseThrow(() -> new SimpleSnsApplicationException(ErrorCode.POST_NOT_FOUND, String.format("postId is %d", postId)));
+        UserEntity userEntity = userEntityRepository.findByUserName(userName)
+                .orElseThrow(() -> new SimpleSnsApplicationException(ErrorCode.USER_NOT_FOUND, String.format("userName is %s", userName)));
+
+        commentEntityRepository.save(CommentEntity.of(comment, postEntity, userEntity));
+
+        // create alarm
+        // notificationService.send(AlarmType.NEW_COMMENT_ON_POST, new AlarmArgs(userEntity.getId(), postId), postEntity.getUser());
+        alarmProducer.send(new AlarmEvent(AlarmType.NEW_COMMENT_ON_POST, new AlarmArgs(userEntity.getId(), postId), postEntity.getUser().getId()));
+    }
+
+    public Page<Comment> getComments(Integer postId, Pageable pageable) {
+        PostEntity postEntity = postEntityRepository.findById(postId).orElseThrow(() -> new SimpleSnsApplicationException(ErrorCode.POST_NOT_FOUND, String.format("postId is %d", postId)));
+        return commentEntityRepository.findAllByPost(postEntity, pageable).map(Comment::fromEntity);
     }
 
 }
