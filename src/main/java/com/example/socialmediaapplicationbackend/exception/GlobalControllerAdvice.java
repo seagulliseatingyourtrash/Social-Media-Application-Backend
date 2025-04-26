@@ -11,6 +11,7 @@ import static com.example.socialmediaapplicationbackend.exception.ErrorCode.DATA
 @Slf4j
 @RestControllerAdvice
 public class GlobalControllerAdvice {
+
     @ExceptionHandler(SimpleSnsApplicationException.class)
     public ResponseEntity<?> errorHandler(SimpleSnsApplicationException e) {
         log.error("Error occurs {}", e.toString());
