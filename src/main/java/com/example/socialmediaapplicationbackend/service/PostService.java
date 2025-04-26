@@ -6,10 +6,12 @@ import com.example.socialmediaapplicationbackend.model.AlarmArgs;
 import com.example.socialmediaapplicationbackend.model.AlarmEvent;
 import com.example.socialmediaapplicationbackend.model.AlarmType;
 import com.example.socialmediaapplicationbackend.model.Post;
+import com.example.socialmediaapplicationbackend.model.entity.CommentEntity;
 import com.example.socialmediaapplicationbackend.model.entity.LikeEntity;
 import com.example.socialmediaapplicationbackend.model.entity.PostEntity;
 import com.example.socialmediaapplicationbackend.model.entity.UserEntity;
 import com.example.socialmediaapplicationbackend.producer.AlarmProducer;
+import com.example.socialmediaapplicationbackend.repository.CommentEntityRepository;
 import com.example.socialmediaapplicationbackend.repository.LikeEntityRepository;
 import com.example.socialmediaapplicationbackend.repository.PostEntityRepository;
 import com.example.socialmediaapplicationbackend.repository.UserEntityRepository;
@@ -68,8 +70,9 @@ public class PostService {
             throw new SimpleSnsApplicationException(ErrorCode.INVALID_PERMISSION, String.format("user %s has no permission with post %d", userId, postId));
         }
         postEntityRepository.delete(postEntity);
+        commentEntityRepository.deleteAllByPost(postEntity);
+        postEntityRepository.delete(postEntity);
     }
-
 
     @Transactional
     public void like(Integer postId, String userName) {

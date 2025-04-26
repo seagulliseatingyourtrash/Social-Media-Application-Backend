@@ -18,7 +18,7 @@ import java.time.Instant;
 @Where(clause = "removed_at is NULL")
 @NoArgsConstructor
 public class CommentEntity {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id = null;
