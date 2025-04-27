@@ -62,7 +62,7 @@
     
     * 2-3-3. [Design Pattern]()
     
-        * 2-3-3-1. [MVC Pattern]()
+        * 2-3-3-1. [MVC Pattern](#mvc-pattern)
     
         * 2-3-3-2. [Repository Pattern]()
     
