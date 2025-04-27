@@ -2,11 +2,11 @@
 
 ### Table of Contents
 
-1. [**Technical Specifications**]()
+1. [**Technical Specifications**](#techinical-specifications)
     
-    1-1. [Core Technologies]() 
+    1-1. [Core Technologies](#core-technologies) 
     
-    1-2. [Testing Frameworks]()
+    1-2. [Testing Frameworks](#testing-frameworks)
     
 2. [**System Design**]()
     
