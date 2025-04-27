@@ -1,0 +1,101 @@
+name: Backend CI/CD Pipeline with Health Checks
+
+on:
+  push:
+    branches: [ main ]
+
+env:
+  AWS_REGION: ${{ secrets.AWS_REGION }}
+  ECR_REPOSITORY: ${{ secrets.ECR_REPOSITORY }}
+  REDIS_HOST: ${{ secrets.REDIS_HOST }}
+  RDS_HOST: ${{ secrets.RDS_HOST }}
+  KAFKA_BROKER: ${{ secrets.KAFKA_BROKER }}
+  ALB_DNS_NAME: ${{ secrets.ALB_DNS_NAME }}
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v2
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Cache Gradle
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
+
+      - name: Build with Gradle
+        run: |
+          chmod +x ./gradlew
+          ./gradlew clean build
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
+
+      - name: Build and Push Docker Image
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          IMAGE_TAG: ${{ github.sha }}
+        run: |
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+
+      - name: Update Launch Template and Refresh Instances
+        run: |
+          TEMPLATE_ID=$(aws ec2 create-launch-template-version \
+            --launch-template-name ${{ secrets.LAUNCH_TEMPLATE_NAME }} \
+            --source-version '$Latest' \
+            --launch-template-data "{\"ImageId\":\"${{ steps.login-ecr.outputs.registry }}/${{ env.ECR_REPOSITORY }}:${{ github.sha }}\"}" \
+            --query 'LaunchTemplateVersion.VersionNumber' \
+            --output text)
+          
+          aws autoscaling update-auto-scaling-group \
+            --auto-scaling-group-name ${{ secrets.ASG_NAME }} \
+            --launch-template LaunchTemplateName=${{ secrets.LAUNCH_TEMPLATE_NAME }},Version=$TEMPLATE_ID
+          
+          aws autoscaling start-instance-refresh \
+            --auto-scaling-group-name ${{ secrets.ASG_NAME }} \
+            --preferences '{"MinHealthyPercentage": 90}'
+
+      - name: Wait for Refresh
+        run: |
+          echo "Waiting for new instances to launch..."
+          sleep 180
+
+      - name: Health Check - ALB
+        run: |
+          echo "Checking ALB health..."
+          curl -f http://${{ env.ALB_DNS_NAME }}/actuator/health || exit 1
+
+      - name: Health Check - Redis
+        run: |
+          echo "Checking Redis connection..."
+          nc -zv ${{ env.REDIS_HOST }} 6379
+
+      - name: Health Check - RDS
+        run: |
+          echo "Checking RDS connection..."
+          nc -zv ${{ env.RDS_HOST }} 5432
+
+      - name: Health Check - Kafka
+        run: |
+          echo "Checking Kafka broker connection..."
+          nc -zv ${{ env.KAFKA_BROKER }} 9092
