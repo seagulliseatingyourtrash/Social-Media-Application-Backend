@@ -126,7 +126,7 @@
 
 ## 2-1. Infrastructure Level System Design
 
-![image.png](Social%20Media%20Application%201e214f0c9dab80019545c0c36825f6ec/image.png)
+![image.png](photos/AWS_architecture.png)
 
 - Frontend Flow :
 
@@ -624,7 +624,7 @@ sequenceDiagram
 
 ### 2-2-3. ERD
 
-![image.png](Social%20Media%20Application%201e214f0c9dab80019545c0c36825f6ec/image%201.png)
+![image.png](photos/ERD.png)
 
 ### 2-2-4. Application Level System Design Optimization
 
@@ -632,21 +632,21 @@ sequenceDiagram
 
 - Implemented Application Level System Design Optimization by caching rarely modified data such as User Data in Redis In-memory Database to reduce database load, optimize query performance, and improve response time.
     
-    ![image.png](Social%20Media%20Application%201e214f0c9dab80019545c0c36825f6ec/image%202.png)
+    ![image.png](photos/Redis_architecture.png)
     
 
 #### 2-2-4-2. Application Architecture Optimization : Event-Driven Architecture
 
 - Implemented Application Level System Design Optimization using Kafka for asynchronous processing to reduce coupling between services, as notifications for Like and Comment services don't require real-time delivery and can tolerate latency according to business logic.
     
-    ![image.png](Social%20Media%20Application%201e214f0c9dab80019545c0c36825f6ec/image%203.png)
+    ![image.png](photos/Kafka_architecture.png)
     
 
 #### 2-2-4-3. Client-Server Connection Optimization : SSE
 
 - Implemented Server-Sent Events (SSE) for server-initiated communication to provide real-time notification updates to clients while reducing unnecessary server load and network overhead.
     
-    ![image.png](Social%20Media%20Application%201e214f0c9dab80019545c0c36825f6ec/image%204.png)
+    ![image.png](photos/Sse_architecture.png)
     
 
 ## 2-3. Code Level System Design
@@ -1033,7 +1033,7 @@ Implemented Test-Driven Development (TDD) approach:
 (2) Implement code to pass tests
 (3) Refactor while maintaining test coverage
 
-![image.png](Social%20Media%20Application%201e214f0c9dab80019545c0c36825f6ec/image%205.png)
+![image.png](photos/TDD.png)
 
 ## 3-2. Test Package Structure
 
