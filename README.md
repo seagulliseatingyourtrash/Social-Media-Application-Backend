@@ -2,7 +2,7 @@
 
 ### Table of Contents
 
-1. [**Technical Specifications**](#techinical-specifications)
+1. [**Technical Specifications**](#technical-specifications)
     
     1-1. [Core Technologies](#core-technologies) 
     
