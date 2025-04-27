@@ -8,103 +8,103 @@
     
     1-2. [Testing Frameworks](#testing-frameworks)
     
-2. [**System Design**]()
+2. [**System Design**](#system-design)
     
-    2-1. [Infrastructure Level System Design]()
+    2-1. [Infrastructure Level System Design](#infrastructure-level-system-design)
     
-    2-2. [Application Level System Design]()
+    2-2. [Application Level System Design](#application-level-system-design)
     
-    * 2-2-1. [Sequence Diagram]()
+    * 2-2-1. [Sequence Diagram](#sequence-diagram)
     
-        * 2-2-1-1. [User Registration]()
+        * 2-2-1-1. [User Registration](#user-registration)
     
-        * 2-2-1-2. [User Login]()
+        * 2-2-1-2. [User Login](#user-login)
     
-        * 2-2-1-3. [Create Post]()
+        * 2-2-1-3. [Create Post](#create-post)
     
-        * 2-2-1-4. [Delete Post]()
+        * 2-2-1-4. [Delete Post](#delete-post)
     
-        * 2-2-1-5. [Edit Post]()
+        * 2-2-1-5. [Edit Post](#edit-post)
     
-        * 2-2-1-6. [Post List]()
+        * 2-2-1-6. [Post List](#post-list)
     
-        * 2-2-1-7. [Like Feature: User A likes User B's post]()
+        * 2-2-1-7. [Like Feature: User A likes User B's post](#like-feature)
     
-        * 2-2-1-8. [Comment Feature: User A comments on User B's post]()
+        * 2-2-1-8. [Comment Feature: User A comments on User B's post](#comment-feature)
     
-        * 2-2-1-9. [Notification Feature: User A requests their notification list]()
+        * 2-2-1-9. [Notification Feature: User A requests their notification list](#notification-feature)
     
-    * 2-2-2. [API Documentation (RESTful)]()
+    * 2-2-2. [API Documentation (RESTful)](#api-documentation)
     
-        * 2-2-2-1. [User API]()
+        * 2-2-2-1. [User API](#user-api)
     
-        * 2-2-2-2. [Post API]()
+        * 2-2-2-2. [Post API](#post-api)
     
-        * 2-2-2-3. [Like API]()
+        * 2-2-2-3. [Like API](#like-api)
     
-        * 2-2-2-4. [Comment API]()
+        * 2-2-2-4. [Comment API](#comment-api)
     
-    * 2-2-3. [ERD]()
+    * 2-2-3. [ERD](#erd)
     
-    * 2-2-4. [Event-Driven Architecture]()
+    * 2-2-4. [Application Level System Design Optimization](#alsdo)
     
-        * 2-2-4-1. [Database Architecture Optimization : In-memory Database Caching]()
+        * 2-2-4-1. [Database Architecture Optimization : In-memory Database Caching](#dao)
     
-        * 2-2-4-2. [Application Architecture Optimization : Event-Driven Architecture]()
+        * 2-2-4-2. [Application Architecture Optimization : Event-Driven Architecture](#aao)
     
-        * 2-2-4-3. [Client-Server Connection Optimization : SSE]()
+        * 2-2-4-3. [Client-Server Connection Optimization : SSE](#sse)
     
-    2-3. [Code Level System Design]()
+    2-3. [Code Level System Design](#code-level-system-design)
     
-    * 2-3-1. [Project Structure]()
+    * 2-3-1. [Project Structure](#project-structure)
     
-    * 2-3-2. [Project Architecture]()
+    * 2-3-2. [Project Architecture](#project-architecture)
     
-    * 2-3-3. [Design Pattern]()
+    * 2-3-3. [Design Pattern](#design-pattern)
     
         * 2-3-3-1. [MVC Pattern](#mvc-pattern)
     
-        * 2-3-3-2. [Repository Pattern]()
+        * 2-3-3-2. [Repository Pattern](#repository-pattern)
     
-        * 2-3-3-3. [Factory Pattern]()
+        * 2-3-3-3. [Factory Pattern](#factory-pattern)
     
-        * 2-3-3-4. [Singleton Pattern]()
+        * 2-3-3-4. [Singleton Pattern](#singleton-pattern)
     
-        * 2-3-3-5. [Builder Pattern]()
+        * 2-3-3-5. [Builder Pattern](#builder-pattern)
     
-    * 2-3-4. [Code Level System Design Optimization]()
+    * 2-3-4. [Code Level System Design Optimization](#clsdo)
     
-        * 2-3-4-1. [Data Structures and Algorithm Design Optimization : HashMap]() 
+        * 2-3-4-1. [Data Structures and Algorithm Design Optimization : HashMap](#dsa) 
     
-        * 2-3-4-2. [Programming Language Optimization : NullPointerException]()
+        * 2-3-4-2. [Programming Language Optimization : NullPointerException](#plo)
     
-        * 2-3-4-3. [Database Query Optimization : N+1 Query Problem]()
+        * 2-3-4-3. [Database Query Optimization : N+1 Query Problem](#dqo)
     
-        * 2-3-4-4. [Data Management Optimization : Soft Delete Pattern]()
+        * 2-3-4-4. [Data Management Optimization : Soft Delete Pattern](#dmo)
     
-        * 2-3-4-5. [Data Persistency Layer Optimization : DTO and DAO]()
+        * 2-3-4-5. [Data Persistency Layer Optimization : DTO and DAO](#dplo)
     
-        * 2-3-4-6. [Error Handling Optimization : ENUM class and GlobalExceptionHandler]()
+        * 2-3-4-6. [Error Handling Optimization : ENUM class and GlobalExceptionHandler](#eho)
     
-3. [**Development Process: TDD Approach**]()
+3. [**Development Process: TDD Approach**](#development-process)
     
-    3-1. [Process Description]()
+    3-1. [Process Description](#process-description)
     
-    3-2. [Test Package Structure]()
+    3-2. [Test Package Structure](#test-package-structure)
     
-    3-3. [Example Test Cases]()
+    3-3. [Example Test Cases](#example-test-cases)
     
-    * 3-3-1. [Unit Testing]()
+    * 3-3-1. [Unit Testing](#unit-testing)
     
-    * 3-3-2. [Integration Testing]()
+    * 3-3-2. [Integration Testing](#integration-testing)
     
-    3-4. [Test Coverage]()
+    3-4. [Test Coverage](#test-coverage)
     
 
 ---
-<a id="techinical-specifications"></a>
+<a id="technical-specifications"></a>
 # 1. Technical Specifications
-
+<a id="core-technologies"></a>
 ## 1-1. Core Technologies
 
 - Language : Java SE 11
@@ -115,15 +115,15 @@
 - Build Tool : Gradle
 - Utility : Lombok
 - CI/CD Tool : GitHub Actions, Docker
-
+<a id="testing-frameworks"></a>
 ## 1-2. Testing Frameworks
 
 - Unit Testing : JUnit 5, Mockito
 - Integration Testing : Spring Boot Test
 - API Testing : Postman
-
+<a id="system-design"></a>
 # 2. System Design
-
+<a id="infrastructure-level-system-design"></a>
 ## 2-1. Infrastructure Level System Design
 
 ![image.png](photos/AWS_architecture.png)
@@ -141,11 +141,11 @@
                    ↳ [RDS for PostgreSQL(Master-Slave)]
                    ↳ [MSK (Kafka)]
 ```
-
+<a id="application-level-system-design"></a>
 ## 2-2. Application Level System Design
-
+<a id="sequence-diagram"></a>
 ### 2-2-1. Sequence Diagram
-
+<a id="user-registration"></a>
 #### 2-2-1-1. User Registration
 
 ```mermaid
@@ -185,7 +185,7 @@ sequenceDiagram
     end
 
 ```
-
+<a id="user-login"></a>
 #### 2-2-1-2. User Login
 
 ```mermaid
@@ -227,7 +227,7 @@ sequenceDiagram
     end
 
 ```
-
+<a id="create-post"></a>
 #### 2-2-1-3. Create Post
 
 ```mermaid
@@ -272,7 +272,7 @@ sequenceDiagram
     end
 
 ```
-
+<a id="delete-post"></a>
 #### 2-2-1-4. Delete Post
 
 ```mermaid
@@ -317,7 +317,7 @@ sequenceDiagram
     end
 
 ```
-
+<a id="edit-post"></a>
 #### 2-2-1-5. Edit Post
 
 ```mermaid
@@ -362,7 +362,7 @@ sequenceDiagram
     end
 
 ```
-
+<a id="post-list"></a>
 #### 2-2-1-6. Post List
 
 ```mermaid
@@ -411,7 +411,7 @@ sequenceDiagram
         CloudFront -->> Client: Return Failure with Reason Code (INTERNAL_SERVER_ERROR)
     end
 ```
-
+<a id="like-feature"></a>
 #### 2-2-1-7. Like Feature: User A likes User B's post
 
 ```mermaid
@@ -477,7 +477,7 @@ sequenceDiagram
     end
 
 ```
-
+<a id="comment-feature"></a>
 #### 2-2-1-8. Comment Feature: User A comments on User B's post
 
 ```mermaid
@@ -542,7 +542,7 @@ sequenceDiagram
     end
 
 ```
-
+<a id="notification-feature"></a>
 #### 2-2-1-9. Notification Feature: User A requests their notification list
 
 ```mermaid
@@ -589,9 +589,9 @@ sequenceDiagram
     end
 
 ```
-
+<a id="api-documentation"></a>
 ### 2-2-2. **API Documentation (RESTful)**
-
+<a id="user-api"></a>
 #### 2-2-2-1. User API
 
 | Method | Endpoint | Description | Request Body | Response |
@@ -599,7 +599,7 @@ sequenceDiagram
 | POST | `/api/v1/users/join` | User registration | `{ "userName": string, "password": string }` | 200 OK / Error Reason |
 | POST | `/api/v1/users/login` | User login | `{ "userName": string, "password": string }` | 200 OK with token / Error Reason |
 | GET | `/api/v1/users/alarm` | Fetch user's notifications | (Header: Authorization) | 200 OK (Alarm List) / Unauthorized |
-
+<a id="post-api"></a>
 #### 2-2-2-2. Post API
 
 | Method | Endpoint | Description | Request Body | Response |
@@ -609,48 +609,48 @@ sequenceDiagram
 | DELETE | `/api/v1/posts/{postId}` | Delete a post | (Header: Authorization) | 200 OK / Error Reason |
 | GET | `/api/v1/posts` | Get all posts (feed) | (Pagination query optional) | 200 OK (Post List) |
 | GET | `/api/v1/posts/my` | Get my posts | (Header: Authorization) | 200 OK (My Post List) |
-
+<a id="like-api"></a>
 #### 2-2-2-3. Like API
 
 | Method | Endpoint | Description | Response |
 | --- | --- | --- | --- |
 | POST | `/api/v1/posts/{postId}/likes` | Like or Unlike a post | 200 OK / Error Reason |
-
+<a id="comment-api"></a>
 #### 2-2-2-4. Comment API
 
 | Method | Endpoint | Description | Request Body | Response |
 | --- | --- | --- | --- | --- |
 | POST | `/api/v1/posts/{postId}/comments` | Add a comment to a post | `{ "comment": string }` | 200 OK / Error Reason |
-
+<a id="erd"></a>
 ### 2-2-3. ERD
 
 ![image.png](photos/ERD.png)
-
+<a id="alsdo"></a>
 ### 2-2-4. Application Level System Design Optimization
-
+<a id="dao"></a>
 #### 2-2-4-1. Database Architecture Optimization : In-memory Database Caching
 
 - Implemented Application Level System Design Optimization by caching rarely modified data such as User Data in Redis In-memory Database to reduce database load, optimize query performance, and improve response time.
     
     ![image.png](photos/Redis_architecture.png)
     
-
+<a id="aao"></a>
 #### 2-2-4-2. Application Architecture Optimization : Event-Driven Architecture
 
 - Implemented Application Level System Design Optimization using Kafka for asynchronous processing to reduce coupling between services, as notifications for Like and Comment services don't require real-time delivery and can tolerate latency according to business logic.
     
     ![image.png](photos/Kafka_architecture.png)
     
-
+<a id="sse"></a>
 #### 2-2-4-3. Client-Server Connection Optimization : SSE
 
 - Implemented Server-Sent Events (SSE) for server-initiated communication to provide real-time notification updates to clients while reducing unnecessary server load and network overhead.
     
     ![image.png](photos/Sse_architecture.png)
     
-
+<a id="code-level-system-design"></a>
 ## 2-3. Code Level System Design
-
+<a id="project-structure"></a>
 ### 2-3-1. Project Structure
 
 ```jsx
@@ -686,7 +686,7 @@ sequenceDiagram
 │               ├── service/                # Service tests
 │               └── fixture/                # Test data providers
 ```
-
+<a id="project-architecture"></a>
 ### 2-3-2. Project Architecture
 
 ```jsx
@@ -705,9 +705,9 @@ Infrastructure Layer
 ├── exception/              # Error handling
 └── utils/                  # Common utilities
 ```
-
+<a id="design-pattern"></a>
 ### 2-3-3. Design Pattern
-
+<a id="mvc-pattern"></a>
 #### 2-3-3-1. MVC Pattern
 
 ```jsx
@@ -728,7 +728,7 @@ Supporting Components
 ├── consumer/producer/      # Message queue handlers
 └── utils/                 # Utility classes
 ```
-
+<a id="repository-pattern"></a>
 #### 2-3-3-2. Repository Pattern
 
 - Location: repository/ package
@@ -745,7 +745,7 @@ Supporting Components
     
     ```
     
-
+<a id="factory-pattern"></a>
 #### 2-3-3-3. Factory Pattern
 
 - Location: configuration/ package
@@ -764,7 +764,7 @@ Supporting Components
             RedisURI redisURI = RedisURI.create(redisProperties.getUrl());
     ```
     
-
+<a id="singleton-pattern"></a>
 #### 2-3-3-4. Singleton Pattern
 
 - Location: All objects managed as Spring Beans
@@ -783,7 +783,7 @@ Supporting Components
         private final EmitterRepository emitterRepository;
     ```
     
-
+<a id="builder-pattern"></a>
 #### 2-3-3-5. Builder Pattern
 
 - Location: Using Lombok @AllArgsConstructor
@@ -816,9 +816,9 @@ Supporting Components
     }
     ```
     
-
+<a id="clsdo"></a>
 ### 2-3-4. Code Level System Design Optimization
-
+<a id="dsa"></a>
 #### 2-3-4-1. Data Structures and Algorithm Design Optimization : HashMap
 
 - Implemented HashMap to store SSE Emitters per user, achieving O(1) time complexity for immediate access without database queries, providing high performance and efficiency in real-time notification systems.
@@ -831,7 +831,7 @@ Supporting Components
         private Map<String, SseEmitter> emitterMap = new HashMap<>();
     ```
     
-
+<a id="plo"></a>
 #### 2-3-4-2. Programming Language Optimization : NullPointerException
 
 - Implemented robust null safety handling by returning Optional results in the Repository Layer for explicit null possibility indication and performing null checks in the Service Layer during business logic execution, ensuring more secure NullPointerException handling.
@@ -860,7 +860,7 @@ Supporting Components
     }
     ```
     
-
+<a id="dqo"></a>
 #### 2-3-4-3. Database Query Optimization : N+1 Query Problem
 
 - Implemented Database Query Optimization by setting fetch type to LAZY in JPA entity relationships to prevent N+1 query problems, reducing unnecessary database calls and improving query performance.
@@ -885,7 +885,7 @@ Supporting Components
     }
     ```
     
-
+<a id="dmo"></a>
 #### 2-3-4-4. Data Management Optimization : Soft Delete Pattern
 
 - Implemented Data Management Optimization using Soft Delete pattern to maintain data history and enable potential data recovery, enhancing user experience by preventing permanent data loss while maintaining system performance.
@@ -920,7 +920,7 @@ Supporting Components
     }
     ```
     
-
+<a id="dplo"></a>
 #### 2-3-4-5. Data Persistency Layer Optimization : DTO and DAO
 
 - Implemented Data Persistency Layer Optimization by strictly separating DTO (Data Transfer Object) and DAO (Data Access Object) patterns to maintain entity integrity and prevent direct entity manipulation during business logic processing.
@@ -977,7 +977,7 @@ Supporting Components
     }
     ```
     
-
+<a id="eho"></a>
 #### 2-3-4-6. Error Handling Optimization : ENUM class and GlobalExceptionHandler
 
 - Implemented Error Handling Optimization by creating dedicated Exception package with ENUM-based error codes and Global Exception Handler to ensure consistent and centralized exception handling across the application.
@@ -1023,9 +1023,9 @@ Supporting Components
     
     ```
     
-
+<a id="development-process"></a>
 # 3. **Development Process: TDD Approach**
-
+<a id="process-description"></a>
 ## 3-1. Process Description
 
 Implemented Test-Driven Development (TDD) approach:
@@ -1034,7 +1034,7 @@ Implemented Test-Driven Development (TDD) approach:
 (3) Refactor while maintaining test coverage
 
 ![image.png](photos/TDD.png)
-
+<a id="test-package-structure"></a>
 ## 3-2. Test Package Structure
 
 ```jsx
@@ -1054,9 +1054,9 @@ src/test/java/
     │
     └── SocialMediaApplicationBackendApplicationTests.java  # Application Context Test
 ```
-
+<a id="example-test-cases"></a>
 ## 3-3. Example Test Cases
-
+<a id="unit-testing"></a>
 ### 3-3-1. Unit Testing
 
 - Implemented Unit Testing by isolating individual components through dependency mocking, testing each layer independently using Given-When-Then pattern to verify specific functionality and business logic.
@@ -1100,7 +1100,7 @@ src/test/java/
     }
     ```
     
-
+<a id="integration-testing"></a>
 ### 3-3-2. Integration Testing
 
 - Implemented Integration Testing to verify end-to-end workflows across all application layers using real dependencies and database operations.
@@ -1139,7 +1139,7 @@ src/test/java/
     }
     ```
     
-
+<a id="test-coverage"></a>
 ## 3-4. Test Coverage
 
 - Demonstrated development process reliability and code quality assurance through comprehensive test coverage metrics, achieving 85% overall coverage with 90% unit test coverage and 80% integration test coverage, validating the systematic Test-Driven Development approach.
