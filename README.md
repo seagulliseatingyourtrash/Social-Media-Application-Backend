@@ -102,7 +102,7 @@
     
 
 ---
-
+<a id="techinical-specifications"></a>
 # 1. Technical Specifications
 
 ## 1-1. Core Technologies
